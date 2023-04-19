@@ -5,7 +5,7 @@ int main() {
 	try {
 	Events::setUpEvents("Events.txt");
 	//main menu
-	void gameprocess();
+	gameprocess();
 
 	}
 	catch(const exception& ex) {

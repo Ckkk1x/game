@@ -9,14 +9,12 @@ using namespace std;
 class Events {
 private:
 	string text;
-	string id;
-	static map<string, Events> eventsArray;
-	vector<Options> options;
-
 
 public:
 	Events();
 	static void setUpEvents(string fileName);
+	static map<string, Events> eventsArray;
+	vector<Options> options;
 	
-
+	string getText();
 };

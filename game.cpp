@@ -4,6 +4,7 @@ using namespace std;
 int main() {
 	try {
 	Events::setUpEvents("Events.txt");
+	setSizeOfWindow();
 	//main menu
 	gameprocess();
 

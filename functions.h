@@ -5,3 +5,4 @@
 void gameprocess();
 void setSizeOfWindow();
 void showEvent(Events event);
+void handleInput(Events event);

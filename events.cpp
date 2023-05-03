@@ -10,7 +10,9 @@ Events::Events() {
    map<string, Events> Events::eventsArray = {};
 
 void Events::setUpEvents(string fileName) {
-    setlocale(LC_ALL, "ru_RU.UTF-8"); // Для нормального считывания русских символов
+    // Для нормального считывания русских символов
+    setlocale(LC_ALL, "ru_RU.UTF-8"); 
+
     fstream file;
     file.open(fileName, ios::in);
     if (!file) {
@@ -24,6 +26,8 @@ void Events::setUpEvents(string fileName) {
         while(!file.eof()){
             string line;
             line = "";
+            bool eventIsReadyToSave;
+            eventIsReadyToSave = false;
             getline(file, line);
             if (line == "<e>") {
                 //перемещение в рамках одного события (между тэгами <e>)
@@ -84,13 +88,14 @@ void Events::setUpEvents(string fileName) {
                         (*tempEvent).options.push_back(*tempOption);
                     }
                 } while (line != "<-e>" && !file.eof());
+                eventIsReadyToSave = true;
+            }
+            if (eventIsReadyToSave) {
+                Events::eventsArray[tempID] = *tempEvent;
+                break;
             }
         }
-        Events::eventsArray[tempID] = *tempEvent;
     }
-
-
-
 
 	file.close();
 }

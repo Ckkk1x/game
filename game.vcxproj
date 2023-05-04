@@ -130,11 +130,13 @@
     <ClCompile Include="functions.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="events.cpp" />
+    <ClCompile Include="MainHero.cpp" />
     <ClCompile Include="Options.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="events.h" />
     <ClInclude Include="functions.h" />
+    <ClInclude Include="MainHero.h" />
     <ClInclude Include="Options.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

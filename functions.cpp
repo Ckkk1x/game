@@ -1,5 +1,6 @@
 #include "functions.h"
 #include "events.h"
+#include "MainHero.h"
 #include <iostream>
 #include <locale.h>
 #include <conio.h>
@@ -12,8 +13,7 @@ void gameprocess() {
 	showEvent(event);
     Events event2 = Events::eventsArray["A2"];
     showEvent(event2);
-    
-	//void impactOnHero();
+
 	// Проверка персонажа - может быть методом самого класса
 }
 
@@ -42,8 +42,13 @@ void showEvent(Events event) {
     ----------------------------------------------------------
     )";
     handleInput(event);
+    if (userChoice != -1) {
+        impactOnHero(event.options[userChoice - 1]);
+    }
+    (*MainHero::mainhero).haveDiedOrNot();
     system("cls");
 }
+
 
 void handleInput(Events event) {
     SetConsoleOutputCP(1251);
@@ -57,6 +62,7 @@ void handleInput(Events event) {
             // Если это событие без выбора, то нужно будет просто кликнуть "c" что бы продолжить
             // или можно закинуть это в default и ловить нажатие любоой другой кнопки
             done = true;
+            userChoice = -1;
         }
         switch (key) {
         case 49: // 1
@@ -64,7 +70,6 @@ void handleInput(Events event) {
             if (sizeOfOptionsArray >= 1) {
                 done = true;
                 userChoice = 1;
-                cout << "1" << endl;
             } 
             break;
         case 50: // 2
@@ -72,7 +77,6 @@ void handleInput(Events event) {
             if (sizeOfOptionsArray >= 2) {
                 done = true;
                 userChoice = 2;
-                cout << "2" << endl;
             }
             break;
         case 51: // 3
@@ -80,7 +84,6 @@ void handleInput(Events event) {
             if (sizeOfOptionsArray >= 3) {
                 done = true;
                 userChoice = 3;
-                cout << "3" << endl;
             }
             break;
         case 52: // 4
@@ -152,4 +155,12 @@ void handleInput(Events event) {
             break;
         }
     }
+}
+
+void impactOnHero(Options option) {
+    (*MainHero::mainhero).changePhysicalHealth(option.changePhysical);
+    (*MainHero::mainhero).changeMentalHealth(option.changeMental);
+    (*MainHero::mainhero).changeHope(option.changeHope);
+
+    (*MainHero::mainhero).changeResurrection(option.changeResurrection);
 }

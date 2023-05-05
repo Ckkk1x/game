@@ -6,15 +6,54 @@
 #include <conio.h>
 using namespace std;
 
-int userChoice = 0;
+int userChoice = -1;
+bool leaveToMenu = false;
+
+void menu() {
+    setlocale(LC_ALL, "rus");
+    cout << R"(
+    <--------------- Menu --------------->
+    1. Продолжить
+    2. Новая игра
+    0. Выйти
+    )";
+    int key;
+    bool done = false;
+    while (!done) {
+        key = _getch();
+        switch (key)
+        {
+        case 49: // 1
+            setlocale(LC_ALL, "ru_RU.UTF-8");
+            done = true;
+            gameprocess();
+            break;
+        case 50: // 2
+            setlocale(LC_ALL, "ru_RU.UTF-8");
+            done = true;
+            MainHero::mainhero->setupStats();
+            gameprocess();
+            break;
+        case 48: // 0
+            exit(0);
+            break;
+        default:
+            break;
+        }
+        leaveToMenu = false;
+    }  
+}
 
 void gameprocess() {
-	Events event = Events::eventsArray["A1"];
-	showEvent(event);
-    Events event2 = Events::eventsArray["A2"];
-    showEvent(event2);
-
-	// Проверка персонажа - может быть методом самого класса
+    system("cls");
+    string idsOfEvents[] = { "A1", "A2", "R1"};
+    for(auto id : idsOfEvents) {
+	showEvent(Events::eventsArray[id]);
+        if (leaveToMenu) {
+            // TODO тут должно быть сохранение
+            return;
+        }
+    }
 }
 
 void setSizeOfWindow() {
@@ -36,12 +75,23 @@ void showEvent(Events event) {
     )";
     cout << event.getText() << endl << endl;
     for (int i = 0; i < event.options.size(); i++) {
-        cout << i + 1 << ") " << event.options[i].text << endl;
+        cout << '\t' << i + 1 << ") " << event.options[i].text << endl;
     }
+    setlocale(LC_ALL, "rus");
+    cout << endl << "\t->esc для выхода в главное меню" << endl;
     cout << R"(
     ----------------------------------------------------------
-    )";
+)";
+    cout << "\tPhysical hp: " << (*MainHero::mainhero).getPhysicalHealth() << endl;
+    cout << "\tMental hp: " << (*MainHero::mainhero).getMentalHealth() << endl;
+    cout << "\tHope: " << (*MainHero::mainhero).getHope() << endl;
+    cout << "\tResurrection: " << (*MainHero::mainhero).getResurrection() << endl;
+    setlocale(LC_ALL, "ru_RU.UTF-8");
+    cout << endl;
     handleInput(event);
+    if (leaveToMenu) {
+        return;
+    }
     if (userChoice != -1) {
         impactOnHero(event.options[userChoice - 1]);
     }
@@ -49,10 +99,7 @@ void showEvent(Events event) {
     system("cls");
 }
 
-
 void handleInput(Events event) {
-    SetConsoleOutputCP(1251);
-    SetConsoleCP(1251);
     int key;
     bool done = false;
     int sizeOfOptionsArray = event.options.size();
@@ -91,7 +138,6 @@ void handleInput(Events event) {
             if (sizeOfOptionsArray >= 4) {
                 done = true;
                 userChoice = 4;
-                cout << "4" << endl;
             }
             break;
         case 53: // 5
@@ -99,7 +145,6 @@ void handleInput(Events event) {
             if (sizeOfOptionsArray >= 5) {
                 done = true;
                 userChoice = 5;
-                cout << "5" << endl;
             }
             break;
         case 54: // 6
@@ -107,7 +152,6 @@ void handleInput(Events event) {
             if (sizeOfOptionsArray >= 6) {
                 done = true;
                 userChoice = 6;
-                cout << "6" << endl;
             }
             break;
         case 55: // 7
@@ -115,7 +159,6 @@ void handleInput(Events event) {
             if (sizeOfOptionsArray >= 7) {
                 done = true;
                 userChoice = 7;
-                cout << "7" << endl;
             }
             break;
         case 56: // 8
@@ -123,7 +166,6 @@ void handleInput(Events event) {
             if (sizeOfOptionsArray >= 8) {
                 done = true;
                 userChoice = 8;
-                cout << "8" << endl;
             }
             break;
         case 57: // 9
@@ -131,7 +173,6 @@ void handleInput(Events event) {
             if (sizeOfOptionsArray >= 9) {
                 done = true;
                 userChoice = 9;
-                cout << "9" << endl;
             }
             break;
         case 48: // 0
@@ -139,15 +180,16 @@ void handleInput(Events event) {
             if (sizeOfOptionsArray >= 10) {
                 done = true;
                 userChoice = 10;
-                cout << "10" << endl;
             }
             break;
         case 27: // Escape
-            // Обработка нажатия клавиши Escape
+            // Тут должен быть переход в меню
             done = true;
+            leaveToMenu = true;
+            system("cls");
             break;
         case 83: // s
-            // Кнопка Сохранения
+            // Кнопка Сохранения 
             done = true;
             break;
         default:

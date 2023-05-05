@@ -13,6 +13,7 @@ public:
 	static MainHero* mainhero;
 
 	MainHero();
+	void setupStats();
 	short int getPhysicalHealth();
 	void changePhysicalHealth(int change);
 	short int getMentalHealth();
@@ -23,5 +24,6 @@ public:
 	void changeResurrection(int change);
 	
 	void haveDiedOrNot();
+	void Reborn();
 
 };

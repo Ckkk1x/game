@@ -8,4 +8,4 @@ void setSizeOfWindow();
 void showEvent(Events event);
 void handleInput(Events event);
 void impactOnHero(Options option);
-int findLineOfEventsById(vector<vector<string>> idsOfEvents, string firstIdOfNextEvents, int currentIndex);
+int findLineOfEventsById(vector<vector<string>> idsOfEvents, string firstIdOfNextEvents);

@@ -46,8 +46,10 @@ void menu() {
 
 void gameprocess() {
     system("cls");
+    bool hasChanged = false;
     vector<vector<string>> idsOfEvents = { { "A1", "A2", "R1", "A4"}, { "B1", "B2", "B3"}, { "C1", "C2", "C3"} };
     for (int eventsGroupIndex = 0; eventsGroupIndex < idsOfEvents.size(); eventsGroupIndex++) {
+        hasChanged = false;
         for (int currentEventIndex = 0; currentEventIndex < idsOfEvents[eventsGroupIndex].size(); currentEventIndex++) {
             string currentId = idsOfEvents[eventsGroupIndex][currentEventIndex];
             Events currentEvent = Events::eventsArray[currentId];
@@ -57,11 +59,15 @@ void gameprocess() {
                 return;
             }
             if (currentEvent.nextEventLine.size() > 0) {
-                if (userChoice != -1) {
-                    eventsGroupIndex = findLineOfEventsById(idsOfEvents, currentEvent.nextEventLine[userChoice], eventsGroupIndex);
-                }
+                eventsGroupIndex = findLineOfEventsById(idsOfEvents, currentEvent.nextEventLine[userChoice]);
+                hasChanged = true;
                 break;
             }
+        }
+        if (!hasChanged) { 
+            // Если вконце линии событий, мы не перейдем на следующие, 
+            // нужно оборвать итерацию, что бы не начать последовательно перебирать линии
+            break;
         }
     }
 }
@@ -102,7 +108,7 @@ void showEvent(Events event) {
     if (leaveToMenu) {
         return;
     }
-    if (userChoice != -1) {
+    if (userChoice != -1 && userChoice != -2) {
         impactOnHero(event.options[userChoice - 1]);
     }
     (*MainHero::mainhero).haveDiedOrNot();
@@ -115,11 +121,11 @@ void handleInput(Events event) {
     int sizeOfOptionsArray = event.options.size();
     while (!done) {
         key = _getch();
-        if (key == 99 || key == 241 && event.options.size() == 0) {
+        if (key == 99 && event.options.size() == 0) {
             // Если это событие без выбора, то нужно будет просто кликнуть "c" что бы продолжить
             // или можно закинуть это в default и ловить нажатие любоой другой кнопки
             done = true;
-            userChoice = -2;
+            userChoice = -1;
         }
         switch (key) {
         case 49: // 1
@@ -217,7 +223,7 @@ void impactOnHero(Options option) {
     (*MainHero::mainhero).changeResurrection(option.changeResurrection);
 }
 
-int findLineOfEventsById(vector<vector<string>> idsOfEvents, string firstIdOfNextEvents, int currentIndex) {
+int findLineOfEventsById(vector<vector<string>> idsOfEvents, string firstIdOfNextEvents) {
     for (int i = 0; i < idsOfEvents.size(); i++) {
         if (firstIdOfNextEvents == idsOfEvents[i][0]) {
             //Ищем следующую линию событий, по первому индексу
@@ -225,5 +231,6 @@ int findLineOfEventsById(vector<vector<string>> idsOfEvents, string firstIdOfNex
             return i-1; 
         }
     }
-    return currentIndex;
+    // Если мы не нашли елемент
+    throw exception("Не найдена следующая цепочка событий!");
 }

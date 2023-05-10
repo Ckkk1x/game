@@ -1,5 +1,6 @@
 #include "events.h"
 #include <fstream>
+#include <sstream>
 #include <iostream>
 #include <locale.h>
 using namespace std;
@@ -86,6 +87,31 @@ void Events::setUpEvents(string fileName) {
                             getline(file, line);
                         }
                         (*tempEvent).options.push_back(*tempOption);
+                    }
+                    if (line == "<N>") {
+                        getline(file, line);
+                        //считывание всего текста из файла
+                        while (line != "<-N>") {
+                            int userVariant;
+                            string nextEventId;
+                            string word;
+                            istringstream iss(line);
+                            for (int i = 0; getline(iss, word, ' '); i++) {
+                                // Держится на доверии и честном слове
+                                // А вообще нужно правильно записывать события, без единой ошибки
+                                if (i == 0) {
+                                    userVariant = stoi(word);
+                                }
+                                if (i == 1) {
+                                    nextEventId = word;
+                                }
+                            }
+                            (*tempEvent).nextEventLine[userVariant] = nextEventId;
+                            getline(file, line);
+                            if (line == "<-e>") {
+                                throw exception("В файле пропущен тэг <-N>");
+                            }
+                        }
                     }
                 } while (line != "<-e>" && !file.eof());
                 eventIsReadyToSave = true;

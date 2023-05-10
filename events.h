@@ -15,6 +15,8 @@ public:
 	static void setUpEvents(string fileName);
 	static map<string, Events> eventsArray;
 	vector<Options> options;
+
+	map<int, string> nextEventLine;
 	
 	string getText();
 };

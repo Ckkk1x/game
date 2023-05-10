@@ -46,12 +46,22 @@ void menu() {
 
 void gameprocess() {
     system("cls");
-    string idsOfEvents[] = { "A1", "A2", "R1"};
-    for(auto id : idsOfEvents) {
-	showEvent(Events::eventsArray[id]);
-        if (leaveToMenu) {
-            // TODO тут должно быть сохранение
-            return;
+    vector<vector<string>> idsOfEvents = { { "A1", "A2", "R1", "A4"}, { "B1", "B2", "B3"}, { "C1", "C2", "C3"} };
+    for (int eventsGroupIndex = 0; eventsGroupIndex < idsOfEvents.size(); eventsGroupIndex++) {
+        for (int currentEventIndex = 0; currentEventIndex < idsOfEvents[eventsGroupIndex].size(); currentEventIndex++) {
+            string currentId = idsOfEvents[eventsGroupIndex][currentEventIndex];
+            Events currentEvent = Events::eventsArray[currentId];
+	        showEvent(currentEvent);
+            if (leaveToMenu) {
+                // TODO тут должно быть сохранение
+                return;
+            }
+            if (currentEvent.nextEventLine.size() > 0) {
+                if (userChoice != -1) {
+                    eventsGroupIndex = findLineOfEventsById(idsOfEvents, currentEvent.nextEventLine[userChoice], eventsGroupIndex);
+                }
+                break;
+            }
         }
     }
 }
@@ -109,7 +119,7 @@ void handleInput(Events event) {
             // Если это событие без выбора, то нужно будет просто кликнуть "c" что бы продолжить
             // или можно закинуть это в default и ловить нажатие любоой другой кнопки
             done = true;
-            userChoice = -1;
+            userChoice = -2;
         }
         switch (key) {
         case 49: // 1
@@ -205,4 +215,15 @@ void impactOnHero(Options option) {
     (*MainHero::mainhero).changeHope(option.changeHope);
 
     (*MainHero::mainhero).changeResurrection(option.changeResurrection);
+}
+
+int findLineOfEventsById(vector<vector<string>> idsOfEvents, string firstIdOfNextEvents, int currentIndex) {
+    for (int i = 0; i < idsOfEvents.size(); i++) {
+        if (firstIdOfNextEvents == idsOfEvents[i][0]) {
+            //Ищем следующую линию событий, по первому индексу
+            // -1 потому что после возвращения значения, оно еще инкрементируется циклом for 
+            return i-1; 
+        }
+    }
+    return currentIndex;
 }

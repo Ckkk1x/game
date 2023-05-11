@@ -216,11 +216,41 @@ void handleInput(Events event) {
 }
 
 void impactOnHero(Options option) {
-    (*MainHero::mainhero).changePhysicalHealth(option.changePhysical);
-    (*MainHero::mainhero).changeMentalHealth(option.changeMental);
-    (*MainHero::mainhero).changeHope(option.changeHope);
+    if (option.changePhysical + (*MainHero::mainhero).getPhysicalHealth() <= 100) {
+        (*MainHero::mainhero).changePhysicalHealth(option.changePhysical);
+    }
+    else {
+        int over = (option.changePhysical + (*MainHero::mainhero).getPhysicalHealth()) - 100;
+        (*MainHero::mainhero).changePhysicalHealth(option.changePhysical - over); 
+    }
 
-    (*MainHero::mainhero).changeResurrection(option.changeResurrection);
+    if (option.changeMental + (*MainHero::mainhero).getMentalHealth() <= 100) {
+        (*MainHero::mainhero).changeMentalHealth(option.changeMental);
+    }
+    else {
+        int over = (option.changeMental + (*MainHero::mainhero).getMentalHealth()) - 100;
+        (*MainHero::mainhero).changeMentalHealth(option.changeMental - over);
+    }
+
+    if (option.changeHope + (*MainHero::mainhero).getHope() <= 100) {
+        (*MainHero::mainhero).changeHope(option.changeHope);
+    }
+    else {
+        int over = (option.changeHope + (*MainHero::mainhero).getHope()) - 100;
+        (*MainHero::mainhero).changeHope(option.changeHope - over);
+    }
+
+
+    int changeResurr = 0;
+    // ≈сли мы хотим восстановить кол-во жизней 
+    if (option.changeResurrection == 3) {
+        changeResurr = option.changeResurrection - (*MainHero::mainhero).getResurrection();
+    }
+    // ≈сли мы хотим просто прибавить какое-то количество жизней
+    else {
+        changeResurr = option.changeResurrection;
+    }
+    (*MainHero::mainhero).changeResurrection(changeResurr);
 }
 
 int findLineOfEventsById(vector<vector<string>> idsOfEvents, string firstIdOfNextEvents) {

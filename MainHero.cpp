@@ -4,11 +4,7 @@
 #include <conio.h>
 using namespace std;
 
-//short int physicalHealth;
-//short int mentalHealth;
-//short int hope;
-//short int resurrection;
-//static MainHero mainhero;
+
 
 MainHero::MainHero() {
 	physicalHealth = 100;

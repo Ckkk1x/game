@@ -46,8 +46,8 @@ void menu() {
 
 void gameprocess() {
     system("cls");
-    bool hasChanged = false;
-    vector<vector<string>> idsOfEvents = { { "A1", "A2", "R1", "A4"}, { "B1", "B2", "B3"}, { "C1", "C2", "C3"} };
+    bool hasChanged = false; 
+    vector<vector<string>> idsOfEvents = { { "A1", "A2"}, { "B1"}, { "C1"} };
     for (int eventsGroupIndex = 0; eventsGroupIndex < idsOfEvents.size(); eventsGroupIndex++) {
         hasChanged = false;
         for (int currentEventIndex = 0; currentEventIndex < idsOfEvents[eventsGroupIndex].size(); currentEventIndex++) {
@@ -60,7 +60,7 @@ void gameprocess() {
             }
             if (currentEvent.nextEventLine.size() > 0) {
                 eventsGroupIndex = findLineOfEventsById(idsOfEvents, currentEvent.nextEventLine[userChoice]);
-                hasChanged = true;
+                hasChanged = true;  
                 break;
             }
         }

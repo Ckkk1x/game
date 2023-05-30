@@ -10,13 +10,13 @@ int userChoice = -1;
 bool leaveToMenu = false;
 
 void menu() {
-    setlocale(LC_ALL, "rus");
+    setlocale(LC_ALL, "rus"); 
     cout << R"(
     <--------------- Menu --------------->
     1. ѕродолжить
     2. Ќова€ игра
     0. ¬ыйти
-    )";
+    )"; 
     int key;
     bool done = false;
     while (!done) {
@@ -47,7 +47,7 @@ void menu() {
 void gameprocess() {
     system("cls");
     bool hasChanged = false; 
-    vector<vector<string>> idsOfEvents = { { "A1", "A2"}, { "B1"}, { "C1"} };
+    vector<vector<string>> idsOfEvents = {{"A4"}, {"B1", "B2"}, {"C1", "C2"}, {"E1"}, {"D1"}};
     for (int eventsGroupIndex = 0; eventsGroupIndex < idsOfEvents.size(); eventsGroupIndex++) {
         hasChanged = false;
         for (int currentEventIndex = 0; currentEventIndex < idsOfEvents[eventsGroupIndex].size(); currentEventIndex++) {
@@ -121,8 +121,8 @@ void handleInput(Events event) {
     int sizeOfOptionsArray = event.options.size();
     while (!done) {
         key = _getch();
-        if (key == 99 && event.options.size() == 0) {
-            // ≈сли это событие без выбора, то нужно будет просто кликнуть "c" что бы продолжить
+        if (key == 32 && event.options.size() == 0) {
+            // ≈сли это событие без выбора, то нужно будет просто кликнуть пробел что бы продолжить
             // или можно закинуть это в default и ловить нажатие любоой другой кнопки
             done = true;
             userChoice = -1;

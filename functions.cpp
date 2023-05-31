@@ -47,7 +47,7 @@ void menu() {
 void gameprocess() {
     system("cls");
     bool hasChanged = false; 
-    vector<vector<string>> idsOfEvents = {{"A4"}, {"B1", "B2"}, {"C1", "C2"}, {"E1"}, {"D1"}};
+    vector<vector<string>> idsOfEvents = {{"A4"}, {"B1"}};
     for (int eventsGroupIndex = 0; eventsGroupIndex < idsOfEvents.size(); eventsGroupIndex++) {
         hasChanged = false;
         for (int currentEventIndex = 0; currentEventIndex < idsOfEvents[eventsGroupIndex].size(); currentEventIndex++) {
@@ -59,8 +59,9 @@ void gameprocess() {
                 return;
             }
             if (currentEvent.nextEventLine.size() > 0) {
+                // Поиск следующей ветки событий
                 eventsGroupIndex = findLineOfEventsById(idsOfEvents, currentEvent.nextEventLine[userChoice]);
-                hasChanged = true;  
+                hasChanged = true;
                 break;
             }
         }
@@ -108,7 +109,7 @@ void showEvent(Events event) {
     if (leaveToMenu) {
         return;
     }
-    if (userChoice != -1 && userChoice != -2) {
+    if (userChoice != -1 && userChoice != -2 && userChoice != 0) {
         impactOnHero(event.options[userChoice - 1]);
     }
     (*MainHero::mainhero).haveDiedOrNot();
@@ -125,7 +126,7 @@ void handleInput(Events event) {
             // Если это событие без выбора, то нужно будет просто кликнуть пробел что бы продолжить
             // или можно закинуть это в default и ловить нажатие любоой другой кнопки
             done = true;
-            userChoice = -1;
+            userChoice = 0;
         }
         switch (key) {
         case 49: // 1
@@ -204,10 +205,10 @@ void handleInput(Events event) {
             leaveToMenu = true;
             system("cls");
             break;
-        case 83: // s
-            // Кнопка Сохранения 
-            done = true;
-            break;
+        //case 83: // s
+        //    // Кнопка Сохранения 
+        //    done = true;
+        //    break;
         default:
             // Неизвестная клавиша, просто игнорируем ее
             break;

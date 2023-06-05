@@ -31,7 +31,7 @@ void menu() {
         case 50: // 2
             setlocale(LC_ALL, "ru_RU.UTF-8");
             done = true;
-            MainHero::mainhero->setupStats();
+            MainHero::mainhero->setupStats(); 
             gameprocess();
             break;
         case 48: // 0
@@ -111,6 +111,9 @@ void showEvent(Events event) {
     }
     if (userChoice != -1 && userChoice != -2 && userChoice != 0) {
         impactOnHero(event.options[userChoice - 1]);
+    }
+    if (userChoice == 0) {
+        impactOnHero(event.zeroOption);
     }
     (*MainHero::mainhero).haveDiedOrNot();
     system("cls");

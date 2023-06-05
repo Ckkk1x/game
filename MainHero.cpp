@@ -10,7 +10,7 @@ MainHero::MainHero() {
 	physicalHealth = 100;
 	mentalHealth = 100;
 	hope = 100;
-	resurrection = 3;
+	resurrection = 1;
 }
 
 MainHero* MainHero::mainhero = new MainHero;
@@ -19,7 +19,7 @@ void MainHero::setupStats() {
 	physicalHealth = 100;
 	mentalHealth = 100;
 	hope = 100;
-	resurrection = 3;
+	resurrection = 1;
 }
 short int MainHero::getPhysicalHealth() {
 	return physicalHealth;

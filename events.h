@@ -15,6 +15,7 @@ public:
 	static void setUpEvents(string fileName);
 	static map<string, Events> eventsArray;
 	vector<Options> options;
+	Options zeroOption; 
 
 	map<int, string> nextEventLine;
 	

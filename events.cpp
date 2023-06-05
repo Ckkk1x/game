@@ -49,6 +49,47 @@ void Events::setUpEvents(string fileName) {
                             }
                         }
                     }
+                    // Заходим в нулевой вариант что бы его полностью заполнить
+                    if (line == "<zo>") {
+                        getline(file, line);
+                        Options* tempOption = new Options; // TODO - не почистил за собой память \
+                        использоваться будет до конца программы, так что не чистил
+                        for (int j = 0; line != "<-zo>"; j++) {
+                            if (line == "<ot>") {
+                                getline(file, line);
+                                //считывание всего текста из файла
+                                while (line != "<-ot>") {
+                                    (*tempOption).text.append(line);
+                                    getline(file, line);
+                                    if (line == "<P>" || line == "<-o>") {
+                                        throw exception("В файле пропущен тэг <-ot>");
+                                    }
+                                }
+                            }
+                            if (line == "<P>") { // physical health
+                                getline(file, line); // TODO - нет проверки, что считывается после тэга
+                                (*tempOption).changePhysical = stoi(line);
+                            }// TODO - добавить елз если нет такого тэга и присвоить ноль
+                            if (line == "<M>") { // mental helth
+                                getline(file, line); // TODO - нет проверки, что считывается после тэга
+                                (*tempOption).changeMental = stoi(line);
+                            }
+                            if (line == "<H>") { // hope 
+                                getline(file, line); // TODO - нет проверки, что считывается после тэга
+                                (*tempOption).changeHope = stoi(line);
+                            }
+                            if (line == "<R>") { // resurrection
+                                getline(file, line); // TODO - нет проверки, что считывается после тэга
+                                (*tempOption).changeResurrection = stoi(line);
+                            }
+                            if (line == "<t>" || line == "<-e>") {
+                                throw exception("В файле пропущен тэг <-o>");
+                            }
+                            getline(file, line);
+                        }
+                        (*tempEvent).zeroOption = (*tempOption);
+                        tempOption = NULL;
+                    }
                     // Заходим в один из вариантов что бы его полностью заполнить
                     if (line == "<o>") {
                         getline(file, line);

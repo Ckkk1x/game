@@ -53,7 +53,7 @@ void gameprocess() {
     bool hasChanged = false; 
     int eventsGroupIndex;
     int currentEventIndex;
-    vector<vector<string>> idsOfEvents = {{"A4"}, {"B1"}};
+    vector<vector<string>> idsOfEvents = {{"A1"}, {"B1"}, {"B2", "B3"} ,{"D1"}, {"C1"}, {"A5"}, {"V1"} };
     // Сохранение
     eventsGroupIndex = Save::save->getEventsGroupIndex();
     currentEventIndex = Save::save->getCurrentEventIndex();

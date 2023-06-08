@@ -132,6 +132,8 @@
     <ClCompile Include="events.cpp" />
     <ClCompile Include="MainHero.cpp" />
     <ClCompile Include="Options.cpp" />
+    <ClCompile Include="Save.cpp" />
+    <ClCompile Include="Save.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="events.h" />

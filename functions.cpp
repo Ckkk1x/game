@@ -1,6 +1,7 @@
 #include "functions.h"
 #include "events.h"
 #include "MainHero.h"
+#include "Save.h"
 #include <iostream>
 #include <locale.h>
 #include <conio.h>
@@ -26,12 +27,15 @@ void menu() {
         case 49: // 1
             setlocale(LC_ALL, "ru_RU.UTF-8");
             done = true;
+            Save::CreateNewSave();
+            Save::save->TakeFromFile();
             gameprocess();
             break;
         case 50: // 2
             setlocale(LC_ALL, "ru_RU.UTF-8");
             done = true;
             MainHero::mainhero->setupStats(); 
+            Save::CreateNewSave();
             gameprocess();
             break;
         case 48: // 0
@@ -47,15 +51,21 @@ void menu() {
 void gameprocess() {
     system("cls");
     bool hasChanged = false; 
+    int eventsGroupIndex;
+    int currentEventIndex;
     vector<vector<string>> idsOfEvents = {{"A4"}, {"B1"}};
-    for (int eventsGroupIndex = 0; eventsGroupIndex < idsOfEvents.size(); eventsGroupIndex++) {
+    // Сохранение
+    eventsGroupIndex = Save::save->getEventsGroupIndex();
+    currentEventIndex = Save::save->getCurrentEventIndex();
+    //---------
+    for (; eventsGroupIndex < idsOfEvents.size(); eventsGroupIndex++) {
         hasChanged = false;
-        for (int currentEventIndex = 0; currentEventIndex < idsOfEvents[eventsGroupIndex].size(); currentEventIndex++) {
+        while (currentEventIndex < idsOfEvents[eventsGroupIndex].size()) {
             string currentId = idsOfEvents[eventsGroupIndex][currentEventIndex];
             Events currentEvent = Events::eventsArray[currentId];
 	        showEvent(currentEvent);
             if (leaveToMenu) {
-                // TODO тут должно быть сохранение
+                Save::save->SaveCurrentProgress(eventsGroupIndex, currentEventIndex, (*MainHero::mainhero));
                 return;
             }
             if (currentEvent.nextEventLine.size() > 0) {
@@ -64,7 +74,9 @@ void gameprocess() {
                 hasChanged = true;
                 break;
             }
+            currentEventIndex++;
         }
+        currentEventIndex = 0;
         if (!hasChanged) { 
             // Если вконце линии событий, мы не перейдем на следующие, 
             // нужно оборвать итерацию, что бы не начать последовательно перебирать линии

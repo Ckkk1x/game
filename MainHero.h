@@ -22,6 +22,10 @@ public:
 	void changeHope(int change);
 	short int getResurrection();
 	void changeResurrection(int change);
+	void setPhysicalHealth(int PhysicalHealth);
+	void setMentalHealth(int MentalHealth);
+	void setHope(int Hope);
+	void setResurrection(int Resurrection);
 	
 	void haveDiedOrNot();
 	void Reborn();

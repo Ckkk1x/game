@@ -17,7 +17,7 @@ void menu() {
     1. Продолжить
     2. Новая игра
     0. Выйти
-    )"; 
+    )";
     int key;
     bool done = false;
     while (!done) {
@@ -29,12 +29,13 @@ void menu() {
             done = true;
             Save::CreateNewSave();
             Save::save->TakeFromFile();
+            (*MainHero::mainhero) = Save::save->mainhero;
             gameprocess();
             break;
         case 50: // 2
             setlocale(LC_ALL, "ru_RU.UTF-8");
             done = true;
-            MainHero::mainhero->setupStats(); 
+            MainHero::mainhero->setupStats();
             Save::CreateNewSave();
             gameprocess();
             break;
@@ -53,7 +54,7 @@ void gameprocess() {
     bool hasChanged = false; 
     int eventsGroupIndex;
     int currentEventIndex;
-    vector<vector<string>> idsOfEvents = {{"A1"}, {"B1"}, {"B2", "B3"} ,{"D1"}, {"C1"}, {"A5"}, {"V1"} };
+    vector<vector<string>> idsOfEvents = {{"B2L1"}, {"B2L1O1"}, {"B2L1O2"}, {"B2L1O3"}, {"B2L1O4"}, {"B2L2"} };
     // Сохранение
     eventsGroupIndex = Save::save->getEventsGroupIndex();
     currentEventIndex = Save::save->getCurrentEventIndex();
@@ -114,7 +115,7 @@ void showEvent(Events event) {
     cout << "\tPhysical hp: " << (*MainHero::mainhero).getPhysicalHealth() << endl;
     cout << "\tMental hp: " << (*MainHero::mainhero).getMentalHealth() << endl;
     cout << "\tHope: " << (*MainHero::mainhero).getHope() << endl;
-    cout << "\tResurrection: " << (*MainHero::mainhero).getResurrection() << endl;
+    //cout << "\tResurrection: " << (*MainHero::mainhero).getResurrection() << endl;
     setlocale(LC_ALL, "ru_RU.UTF-8");
     cout << endl;
     handleInput(event);

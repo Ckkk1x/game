@@ -4,22 +4,20 @@
 #include <conio.h>
 using namespace std;
 
-
-
 MainHero::MainHero() {
 	physicalHealth = 100;
 	mentalHealth = 100;
 	hope = 100;
-	resurrection = 1;
+	resurrection = 0;
 }
 
 MainHero* MainHero::mainhero = new MainHero;
 
 void MainHero::setupStats() {
-	physicalHealth = 100;
-	mentalHealth = 100;
-	hope = 100;
-	resurrection = 1;
+	this->physicalHealth = 100;
+	this->mentalHealth = 100;
+	this->hope = 100;
+	this->resurrection = 0;
 }
 short int MainHero::getPhysicalHealth() {
 	return physicalHealth;
@@ -45,6 +43,22 @@ short int MainHero::getResurrection() {
 void MainHero::changeResurrection(int change) {
 	resurrection += change;
 }
+
+void MainHero::setPhysicalHealth(int physicalHealth) {
+	this->physicalHealth = physicalHealth;
+}
+void MainHero::setMentalHealth(int mentalHealth) {
+	this->mentalHealth = mentalHealth;
+}
+void MainHero::setHope(int hope) {
+	this->hope = hope;
+}
+void MainHero::setResurrection(int resurrection) {
+	this->resurrection = resurrection;
+}
+
+
+
 void MainHero::haveDiedOrNot() {
 	setlocale(LC_ALL, "rus");
 	if (physicalHealth <= 0) {

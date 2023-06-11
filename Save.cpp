@@ -15,7 +15,7 @@ Save::Save() {
 	this->currentEventIndex = 0;
 	this->mainhero = temp;
 }
-//Name of file with savings
+//Имя файла с сохранениями
 string Save::filename = "MySave.txt";
  Save* Save::save = NULL;
 
@@ -47,7 +47,10 @@ void Save::SaveToFile() {
 	}
 	file << this->eventsGroupIndex << '\n';
 	file << this->currentEventIndex << '\n';
-	file.write((char*)&(this->mainhero), sizeof(MainHero));
+	file << this->mainhero.getPhysicalHealth() << '\n';
+	file << this->mainhero.getMentalHealth() << '\n';
+	file << this->mainhero.getHope() << '\n';
+	//file << this->mainhero.getResurrection() << '\n';
 	file.close();
 }
 
@@ -63,11 +66,19 @@ void Save::TakeFromFile() {
 	}
 	else {
 		string temp;
+		int stats;
 		file >> temp;
 		this->eventsGroupIndex = stoi(temp);
 		file >> temp;
 		this->currentEventIndex = stoi(temp);
-		file.read((char*)&(this->mainhero), sizeof(MainHero));
+		file >> stats;
+		this->mainhero.setPhysicalHealth(stats);
+		file >> stats;
+		this->mainhero.setMentalHealth(stats);
+		file >> stats;
+		this->mainhero.setHope(stats);
+		//file >> stats;
+		//this->mainhero.setResurrection(stats);
 	}
 	file.close();
 }

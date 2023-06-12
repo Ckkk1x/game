@@ -17,7 +17,7 @@ Save::Save() {
 }
 //Имя файла с сохранениями
 string Save::filename = "MySave.txt";
- Save* Save::save = NULL;
+Save* Save::save = NULL;
 
  // новое сохранение или же обнуление старого
 void Save::CreateNewSave() {

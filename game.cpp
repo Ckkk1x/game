@@ -3,7 +3,8 @@ using namespace std;
 
 int main() {
 	try {
-		Events::setUpEvents("Events.txt");
+		// Default filename - "Events.txt"
+		Events::setUpEvents("TEST.txt");
 		setSizeOfWindow();
 		while (true)
 		{

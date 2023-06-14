@@ -54,7 +54,8 @@ void gameprocess() {
     bool hasChanged = false; 
     int eventsGroupIndex;
     int currentEventIndex;
-    vector<vector<string>> idsOfEvents = {{"B2L1"}, {"B2L1O1"}, {"B2L1O2"}, {"B2L1O3"}, {"B2L1O4"}, {"B2L2"} };
+    // {{"A1"}, {"B1"}, {"B2"}, {"B3"}, {"C1", "C2", "C3"}, {"F1"}}
+    vector<vector<string>> idsOfEvents = { {"A1"}, {"B1"}, {"B2"}, {"B3"}, {"C1", "C2", "C3"}, {"F1"} };
     // —охранение
     eventsGroupIndex = Save::save->getEventsGroupIndex();
     currentEventIndex = Save::save->getCurrentEventIndex();
@@ -256,18 +257,17 @@ void impactOnHero(Options option) {
         int over = (option.changeHope + (*MainHero::mainhero).getHope()) - 100;
         (*MainHero::mainhero).changeHope(option.changeHope - over);
     }
-
-
-    int changeResurr = 0;
-    // ≈сли мы хотим восстановить кол-во жизней 
-    if (option.changeResurrection == 3) {
-        changeResurr = option.changeResurrection - (*MainHero::mainhero).getResurrection();
-    }
-    // ≈сли мы хотим просто прибавить какое-то количество жизней
-    else {
-        changeResurr = option.changeResurrection;
-    }
-    (*MainHero::mainhero).changeResurrection(changeResurr);
+    
+    //int changeResurr = 0;
+    //// ≈сли мы хотим восстановить кол-во жизней 
+    //if (option.changeResurrection == 3) {
+    //    changeResurr = option.changeResurrection - (*MainHero::mainhero).getResurrection();
+    //}
+    //// ≈сли мы хотим просто прибавить какое-то количество жизней
+    //else {
+    //    changeResurr = option.changeResurrection;
+    //}
+    //(*MainHero::mainhero).changeResurrection(changeResurr);
 }
 
 int findLineOfEventsById(vector<vector<string>> idsOfEvents, string firstIdOfNextEvents) {

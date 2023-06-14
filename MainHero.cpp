@@ -82,37 +82,37 @@ void MainHero::haveDiedOrNot() {
 		)";
 		_getch();
 	}
-	if (physicalHealth <= 0 || mentalHealth <= 0 || hope <= 0) {
+	/*if (physicalHealth <= 0 || mentalHealth <= 0 || hope <= 0) {
 		MainHero::mainhero->Reborn();
-	}
+	}*/
 	
 	setlocale(LC_ALL, "ru_RU.UTF-8");
 }
 
-void MainHero::Reborn(){
-	setlocale(LC_ALL, "rus");
-	if (resurrection > 0) {
-		physicalHealth = 100;
-		mentalHealth = 100;
-		hope = 100;
-		resurrection -= 1;
-
-		system("cls");
-		cout << R"(
-		Персонаж использовал перерождение. Силы восстановлены.
-		)";
-		cout << "Количество оставшихся возрождений: " << resurrection << endl;
-		_getch();
-	}
-	else if (resurrection <= 0) {
-		system("cls");
-		cout << R"(
-		У персонажа не осталось более перерождений. Теперь он упокоится навечно...
-		)";
-		_getch();
-		// TODO Тут должен быть переход к последнему сохранению. Или его загрузка.
-		exit(1);
-	}
-
-	setlocale(LC_ALL, "ru_RU.UTF-8");
-}
+//void MainHero::Reborn(){
+//	setlocale(LC_ALL, "rus");
+//	if (resurrection > 0) {
+//		physicalHealth = 100;
+//		mentalHealth = 100;
+//		hope = 100;
+//		resurrection -= 1;
+//
+//		system("cls");
+//		cout << R"(
+//		Персонаж использовал перерождение. Силы восстановлены.
+//		)";
+//		cout << "Количество оставшихся возрождений: " << resurrection << endl;
+//		_getch();
+//	}
+//	else if (resurrection <= 0) {
+//		system("cls");
+//		cout << R"(
+//		У персонажа не осталось более перерождений. Теперь он упокоится навечно...
+//		)";
+//		_getch();
+//		// TODO Тут должен быть переход к последнему сохранению. Или его загрузка.
+//		exit(1);
+//	}
+//
+//	setlocale(LC_ALL, "ru_RU.UTF-8");
+//}

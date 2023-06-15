@@ -5,6 +5,8 @@
 #include <iostream>
 #include <locale.h>
 #include <conio.h>
+#include <thread>
+#include <chrono>
 using namespace std;
 
 int userChoice = -1;
@@ -100,16 +102,28 @@ void setSizeOfWindow() {
     SetWindowLong(hwndConsole, GWL_STYLE, style);
 }
 
+void printText(string str)
+{
+    for (int i = 0; i < str.length(); i++) {
+        this_thread::sleep_for(0.04s);
+        cout << str[i];
+    }
+}
+
 void showEvent(Events event) {
     cout << R"(
     ----------------------------------------------------------
     )";
-    cout << event.getText() << endl << endl;
+    string str = event.getText();
+    printText(str);
+    cout << endl << endl;
     for (int i = 0; i < event.options.size(); i++) {
         cout << '\t' << i + 1 << ") " << event.options[i].text << endl;
     }
     setlocale(LC_ALL, "rus");
     cout << endl << "\t->esc для выхода в главное меню" << endl;
+    if(event.options.size() == 0)
+        cout << "\t->space для перехода к следующему событию" << endl;
     cout << R"(
     ----------------------------------------------------------
 )";

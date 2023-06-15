@@ -5,6 +5,7 @@
 void menu();
 void gameprocess();
 void setSizeOfWindow();
+void printText(string str);
 void showEvent(Events event);
 void handleInput(Events event);
 void impactOnHero(Options option);

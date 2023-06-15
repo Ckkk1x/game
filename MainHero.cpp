@@ -2,6 +2,7 @@
 #include <iostream>
 #include <locale.h>
 #include <conio.h>
+#include "functions.h"
 using namespace std;
 
 MainHero::MainHero() {
@@ -60,31 +61,31 @@ void MainHero::setResurrection(int resurrection) {
 
 
 void MainHero::haveDiedOrNot() {
+	bool haveDied = false;
 	setlocale(LC_ALL, "rus");
+	string str;
 	if (physicalHealth <= 0) {
 		system("cls");
-		cout <<  R"(
-		Персонаж умер от недостатка физ сил. Нажмите любую кнопку что бы продолжить.
-		)";
-		_getch();
+		str = "\n\tПерсонаж умер от недостатка физ сил.Нажмите любую кнопку что бы продолжить.";
+		haveDied = true;
 	}
 	else if (mentalHealth <= 0) {
 		system("cls");
-		cout << R"(
-		Персонаж сошел с ума, ментальные силы закончились. Теперь он идет спасать украинцев. Нажмите любую кнопку что бы продолжить.
-		)";
-		_getch();
+		str = "\n\tПерсонаж сошел с ума, ментальные силы закончились.Теперь он идет спасать украинцев.Нажмите любую кнопку что бы продолжить.";
+		haveDied = true;
 	}
 	else if (hope <= 0) {
 		system("cls");
-		cout << R"(
-		Персонаж потерял веру...Теперь он вишня. Нажмите любую кнопку что бы продолжить.
-		)";
-		_getch();
+		str = "\n\tПерсонаж потерял веру...Теперь он вишня.Нажмите любую кнопку что бы продолжить.";
+		haveDied = true;
 	}
 	/*if (physicalHealth <= 0 || mentalHealth <= 0 || hope <= 0) {
 		MainHero::mainhero->Reborn();
 	}*/
+	if (haveDied) {
+		printText(str);
+		_getch();
+	}
 	
 	setlocale(LC_ALL, "ru_RU.UTF-8");
 }

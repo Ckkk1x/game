@@ -110,6 +110,35 @@ void printText(string str)
     }
 }
 
+void Characteristics()
+{
+    int physHp = (*MainHero::mainhero).getPhysicalHealth() / 10;
+    int mentalHp = (*MainHero::mainhero).getMentalHealth() / 10;
+    int hopeHp = (*MainHero::mainhero).getHope() / 10;
+    //cout << "\tResurrection: " << (*MainHero::mainhero).getResurrection() << endl;
+    
+    char symbol = 22;
+    char heart = 3;
+    cout << '\t' << "[" << heart << "]";
+    for (int i = 0; i < physHp; i++) {
+        cout << symbol;
+    }
+    cout << endl;
+    char diamond = 4;
+    cout << '\t' << "[" << diamond << "]";
+    for (int i = 0; i < mentalHp; i++) {
+        cout << symbol;
+    }
+    cout << endl;
+    char clubs = 6;
+    cout << '\t' << "[" << clubs << "]";
+    for (int i = 0; i < hopeHp; i++) {
+        cout << symbol;
+    }
+    cout << endl;
+
+}
+
 void showEvent(Events event) {
     cout << R"(
     ----------------------------------------------------------
@@ -127,11 +156,8 @@ void showEvent(Events event) {
     cout << R"(
     ----------------------------------------------------------
 )";
-    cout << "\tPhysical hp: " << (*MainHero::mainhero).getPhysicalHealth() << endl;
-    cout << "\tMental hp: " << (*MainHero::mainhero).getMentalHealth() << endl;
-    cout << "\tHope: " << (*MainHero::mainhero).getHope() << endl;
-    //cout << "\tResurrection: " << (*MainHero::mainhero).getResurrection() << endl;
     setlocale(LC_ALL, "ru_RU.UTF-8");
+    Characteristics();
     cout << endl;
     handleInput(event);
     if (leaveToMenu) {

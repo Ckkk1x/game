@@ -80,7 +80,7 @@ void Save::TakeFromFile() {
 		//file >> stats;
 		//this->mainhero.setResurrection(stats);
 	}
-	file.close();
+	file.close();	
 }
 
 int Save::getEventsGroupIndex() {

@@ -60,7 +60,7 @@ void MainHero::setResurrection(int resurrection) {
 
 
 
-void MainHero::haveDiedOrNot() {
+bool MainHero::haveDiedOrNot() {
 	bool haveDied = false;
 	setlocale(LC_ALL, "rus");
 	string str;
@@ -88,6 +88,7 @@ void MainHero::haveDiedOrNot() {
 	}
 	
 	setlocale(LC_ALL, "ru_RU.UTF-8");
+	return haveDied;
 }
 
 //void MainHero::Reborn(){

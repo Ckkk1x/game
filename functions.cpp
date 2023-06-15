@@ -110,7 +110,7 @@ void printText(string str)
     }
 }
 
-void Characteristics()
+void characteristics()
 {
     int physHp = (*MainHero::mainhero).getPhysicalHealth() / 10;
     int mentalHp = (*MainHero::mainhero).getMentalHealth() / 10;
@@ -157,10 +157,11 @@ void showEvent(Events event) {
     ----------------------------------------------------------
 )";
     setlocale(LC_ALL, "ru_RU.UTF-8");
-    Characteristics();
+    characteristics();
     cout << endl;
     handleInput(event);
     if (leaveToMenu) {
+        system("cls");
         return;
     }
     if (userChoice != -1 && userChoice != -2 && userChoice != 0) {
@@ -169,7 +170,12 @@ void showEvent(Events event) {
     if (userChoice == 0) {
         impactOnHero(event.zeroOption);
     }
-    (*MainHero::mainhero).haveDiedOrNot();
+    if ((*MainHero::mainhero).haveDiedOrNot())
+    {
+        Save::save->CreateNewSave();
+        system("cls");
+        return;
+    }
     system("cls");
 }
 

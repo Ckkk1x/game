@@ -27,7 +27,7 @@ public:
 	void setHope(int Hope);
 	void setResurrection(int Resurrection);
 	
-	void haveDiedOrNot();
+	bool haveDiedOrNot();
 	void Reborn();
 
 };

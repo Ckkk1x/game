@@ -4,7 +4,8 @@ using namespace std;
 int main() {
 	try {
 		// Default filename - "Events.txt"
-		Events::setUpEvents("TEST.txt");
+		// For test - "TEST.txt"
+		Events::setUpEvents("Events.txt");
 		setSizeOfWindow();
 		while (true)
 		{

@@ -56,11 +56,12 @@ void menu() {
 
 void gameprocess() {
     system("cls");
-    bool hasChanged = false; 
+    bool hasChanged = false;
     int eventsGroupIndex;
     int currentEventIndex;
     // {{"A1"}, {"B1"}, {"B2"}, {"B3"}, {"C1", "C2", "C3"}, {"F1"}}
-    vector<vector<string>> idsOfEvents = { {"A1"}, {"B1"}, {"B2"}, {"B3"}, {"C1", "C2", "C3"}, {"F1"} };
+    //{ {"A1"}, {"A2"}, {"B1"}, {"A3"}, {"B2L1"}, {"B2L1O1"}, {"B2L1O2"}, {"B2L1O3"}, {"B2L1O4"}, {"B2L2"}, {"B2L2O1"}, {"B2L2O2"}, {"B2L2O3"}, {"B2L2O4"}, {"B2L3"}, {"B2L3O1"}, {"B2L3O2"}, {"B2L3O3"}, {"B2L3O4"}, {"B2L4"}, {"B2L3O1"}, {"B2L4O2"}, {"B2L4O3"}, {"B2L4O4"}, {"B2"}, {"C2L1"}, {"C2L1O1"}, {"C2L1O2"}, {"C2L1O3"}, {"C2L1O4"}, {"C2L2"}, {"C2L1O1"}, {"C2L2O2"}, {"C2L2O3"}, {"C2L2O4"}, {"C2L3"}, {"C2L3O1"}, {"C2L3O2"}, {"C2L3O3"}, {"C2L3O4"}, {"C2L4"}, {"C2L4O1"}, {"C2L4O2"}, {"C2L4O3"}, {"C2L4O4"}, {"C2"}, {"B3"}, {"D1"}, {"C3"}, {"E1"}, {"B4"}, {"C4"}, {"E1"}, {"E2"}, {"B4"}, {"B5"}, {"B6"}, {"B7"}, {"B8"}, {"B9"}, {"B10"}, {"F1"}, {"C5"}, {"C6"}, {"C7"}, {"C8"}, {"C9"}, {"C10"}, {"G1"}, {"E2"}, {"E3"}, {"E4"}, {"E5"}, {"E6"}, {"E7"}, {"E8"}, {"H1"}};
+    vector<vector<string>> idsOfEvents = { {"A1"}, {"A2"}, {"B1"}, {"A3"}, {"B2L1"}, {"B2L1O1"}, {"B2L1O2"}, {"B2L1O3"}, {"B2L1O4"}, {"B2L2"}, {"B2L2O1"}, {"B2L2O2"}, {"B2L2O3"}, {"B2L2O4"}, {"B2L3"}, {"B2L3O1"}, {"B2L3O2"}, {"B2L3O3"}, {"B2L3O4"}, {"B2L4"}, {"B2L3O1"}, {"B2L4O2"}, {"B2L4O3"}, {"B2L4O4"}, {"B2"}, {"C2L1"}, {"C2L1O1"}, {"C2L1O2"}, {"C2L1O3"}, {"C2L1O4"}, {"C2L2"}, {"C2L1O1"}, {"C2L2O2"}, {"C2L2O3"}, {"C2L2O4"}, {"C2L3"}, {"C2L3O1"}, {"C2L3O2"}, {"C2L3O3"}, {"C2L3O4"}, {"C2L4"}, {"C2L4O1"}, {"C2L4O2"}, {"C2L4O3"}, {"C2L4O4"}, {"C2"}, {"B3"}, {"D1"}, {"C3"}, {"E1"}, {"B4"}, {"C4"}, {"E1"}, {"E2"}, {"B4"}, {"B5"}, {"B6"}, {"B7"}, {"B8"}, {"B9"}, {"B10"}, {"F1"}, {"C5"}, {"C6"}, {"C7"}, {"C8"}, {"C9"}, {"C10"}, {"G1"}, {"E2"}, {"E3"}, {"E4"}, {"E5"}, {"E6"}, {"E7"}, {"E8"}, {"H1"} };
     // Сохранение
     eventsGroupIndex = Save::save->getEventsGroupIndex();
     currentEventIndex = Save::save->getCurrentEventIndex();

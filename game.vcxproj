@@ -44,6 +44,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -130,11 +131,15 @@
     <ClCompile Include="functions.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="events.cpp" />
+    <ClCompile Include="MainHero.cpp" />
     <ClCompile Include="Options.cpp" />
+    <ClCompile Include="Save.cpp" />
+    <ClCompile Include="Save.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="events.h" />
     <ClInclude Include="functions.h" />
+    <ClInclude Include="MainHero.h" />
     <ClInclude Include="Options.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>

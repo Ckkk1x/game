@@ -3,12 +3,17 @@ using namespace std;
 
 int main() {
 	try {
-	Events::setUpEvents("Events.txt");
-	//main menu
-	void gameprocess();
-
+		// Default filename - "Events.txt"
+		// For test - "TEST.txt"
+		Events::setUpEvents("Events.txt");
+		setSizeOfWindow();
+		while (true)
+		{
+			menu();
+		}
 	}
 	catch(const exception& ex) {
+		setlocale(LC_ALL, "rus");
 		system("cls");
 		cout << ex.what() << endl;
 	}
